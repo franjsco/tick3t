@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from './containers/NavBar';
+import Home from './containers/Home/Home';
+import OpenTicket from './containers/OpenTicket/OpenTicket';
+import CardTest from './components/Card';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import NotFound from './containers/NotFound';
+import ViewRequest from './containers/ViewTicket/ViewTicket';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/open" component={OpenTicket} />
+          <Route path="/ticket/:ticketId" component={ViewRequest} />
+          <Route path="/ticket/" exact component={ () => <Redirect to="/" /> } />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
     </div>
   );
 }

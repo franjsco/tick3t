@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Card from '../../components/Card';
 import InsertForm from '../../components/InsertForm';
-import TicketCreated from '../../containers/OpenTicket/TicketCreated';
 import MessageCard from '../MessageCard';
 
 
@@ -71,13 +70,15 @@ class OpenTicket extends Component {
 
     if (this.state.ticketId) {
       return (
-        <TicketCreated ticketId={this.state.ticketId} />
+        <MessageCard 
+          title="Ticket Created"
+          message={`Ticket ID: ${this.state.ticketId}`} />
       );
     } else if(this.state.ticketErr) {
       return (
-      <MessageCard 
-      title="Error"
-      message={this.state.ticketErr} />
+        <MessageCard 
+        title="Error"
+        message={this.state.ticketErr} />
       );
     }
 

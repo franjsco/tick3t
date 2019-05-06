@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input
-} from 'reactstrap';
 
 import Card from '../../components/Card';
+import InsertForm from '../../components/InsertForm';
+import TicketCreated from '../../containers/OpenTicket/TicketCreated';
+import MessageCard from '../MessageCard';
+
 
 class OpenTicket extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: '',
+      ticketId: '',
+      ticketErr: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -43,7 +38,14 @@ class OpenTicket extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const { id, ...rest } = this.state;
+    const { ticketId, ticketErr, ...rest } = this.state;
+
+    if(!rest.firstName || !rest.lastName || !rest.email || !rest.message 
+      || rest.type === '---' || !rest.subject ) {
+        alert('Form is invalid');
+        return;
+
+      }
 
     fetch("http://localhost:3001/tickets", {
       method: 'POST',
@@ -55,120 +57,48 @@ class OpenTicket extends Component {
       })
       .then((json) => {
         this.setState({
-          id: json.id
+          ticketId:  json.id
         });
+      })
+      .catch((err) => {
+        this.setState({
+          ticketErr: err.message
       });
+    });
   }
 
   render() {
 
-    if (this.state.id) {
+    if (this.state.ticketId) {
       return (
-        <div>
-          <Card 
-            title="Ticket Created"
-            message="The ticket has been created"
-            body={`Ticket ID: ${this.state.id}`}
-            footer={<Link to="/">Go to home</Link>} />
-        </div>
+        <TicketCreated ticketId={this.state.ticketId} />
       );
-
+    } else if(this.state.ticketErr) {
+      return (
+      <MessageCard 
+      title="Error"
+      message={this.state.ticketErr} />
+      );
     }
 
-    let FormOpenTicket = (
-      <Form onSubmit={this.handleSubmit}>
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label className="font-weight-bold" for="firstName">First Name</Label>
-              <Input
-                name="firstName"
-                type="text"
-                value={this.state.firstName}
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-          </Col>
-
-          <Col md={6}>
-            <FormGroup>
-              <Label className="font-weight-bold" for="lastName">Last Name</Label>
-              <Input
-                name="lastName"
-                type="text"
-                value={this.state.lastName}
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row form>
-          <Col md={12}>
-            <FormGroup>
-              <Label className="font-weight-bold" for="email">Email</Label>
-              <Input name="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.handleInputChange} />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row form>
-          <Col md={12}>
-            <FormGroup>
-              <Label className="font-weight-bold" for="type">Type</Label>
-              <Input
-                name="type"
-                type="select"
-                value={this.state.type}
-                onChange={this.handleInputChange} >
-                <option value="">---</option>
-                <option value="requestInformation">Request Information</option>
-                <option value="technicalAssistant">Technical Assistant</option>
-              </Input>
-            </FormGroup>
-          </Col>
-        </Row>
-
-        <Row form>
-          <Col sm={12}>
-            <FormGroup>
-              <Label className="font-weight-bold" for="subject">Subject</Label>
-              <Input
-                name="subject"
-                type="text"
-                value={this.state.subject}
-                onChange={this.handleInputChange} />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row form>
-          <Col sm={12}>
-            <FormGroup>
-              <Label className="font-weight-bold" for="message">Message</Label>
-              <Input
-                name="message"
-                type="textarea"
-                value={this.state.message}
-                onChange={this.handleInputChange} />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row form>
-          <Col align="center" md={{ size: 8, offset: 2 }}>
-            <FormGroup>
-              <Button type="submit" color="primary">Open Ticket</Button>
-            </FormGroup>
-          </Col>
-        </Row>
-      </Form>);
 
     return (
       <div>
         <Card
           align="left"
           title="Open Ticket"
-          body={FormOpenTicket}
+          body={
+            <InsertForm 
+              handleInputChange={this.handleInputChange} 
+              handleSubmit={this.handleSubmit}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              email={this.state.email}
+              type={this.state.type}
+              subject={this.state.subject}
+              message={this.state.message}
+            />
+          }
         />
 
       </div>

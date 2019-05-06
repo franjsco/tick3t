@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class Card extends Component {
+class Logo extends Component {
   constructor(props) {
     super(props);
 
@@ -20,4 +20,4 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export default Logo;

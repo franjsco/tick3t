@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 
-class NotFound extends Component {
+class PageNotFound extends Component {
   constructor(props) {
     super(props);
 
@@ -22,4 +22,4 @@ class NotFound extends Component {
   }
 }
 
-export default NotFound;
+export default PageNotFound;

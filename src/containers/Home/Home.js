@@ -8,8 +8,6 @@ import {
 import OpenTicketCard from './OpenTicketCard';
 import ViewTicketCard from './ViewTicketCard';
 
-import './Home.css';
-
 
 class Home extends Component {
   constructor(props) {

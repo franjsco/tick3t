@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Container,
   Row,
   Col
 } from 'reactstrap';
@@ -18,18 +17,14 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <Container>
           <Row>
-            <Col className="col" xs="12" sm="6">
+            <Col  sm="12" md="6">
               <OpenTicketCard />
             </Col>
-            <Col className="col" xs="12" sm="6">
+            <Col  sm="12" md="6">
               <ViewTicketCard />
             </Col>
           </Row>
-        </Container>
-      </div>
     );
   }
 }

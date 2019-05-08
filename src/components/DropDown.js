@@ -20,8 +20,8 @@ class DropDown extends Component {
     <Input
       name = "type"
       type = "select"
-      value = { this.props.type }
-      onChange = { this.props.handleInputChange }
+      value = { this.props.value }
+      onChange = { this.props.onChange }
     >
       <option value="">---</option>
       { options }

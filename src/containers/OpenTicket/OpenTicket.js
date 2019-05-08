@@ -25,8 +25,7 @@ class OpenTicket extends Component {
       type: '',
       subject: '',
       message: '',
-      categories: [],
-      categoriesLoaded: false
+      categories: []
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -188,7 +187,11 @@ class OpenTicket extends Component {
                   Type
                       </Label>
 
-                <DropDown options={this.state.categories} />
+                <DropDown 
+                  options={this.state.categories}
+                  value={this.state.type}
+                  onChange={this.handleInputChange}
+                  />
               </FormGroup>
             </Col>
           </Row>

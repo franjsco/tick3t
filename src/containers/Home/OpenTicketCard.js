@@ -44,9 +44,11 @@ class OpenTicketCard extends Component {
         <Card
           align="center"
           title="Open Ticket"
-          message="Open new ticket"
-          body={<LogoOpenTicket />} 
-          footer={<ButtonPrimary />} />
+          subtitle="Open new ticket"
+         >
+          <LogoOpenTicket />
+          <ButtonPrimary />
+        </Card>
       </div>
     );
   }

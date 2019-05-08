@@ -53,25 +53,24 @@ class ViewTicketCard extends Component {
       return (<Redirect to={`/ticket/${this.state.ticketId}`} />);
     }
     
-    let Search = (
-      <SearchForm
-        name="search"
-        id="search"
-        placeholder="ticket ID"
-        onChange={this.handleChangeInput}
-        onSubmit={this.handleSubmit}
-        value={this.state.ticketId}
-        buttonName="View"
-      />);
-
     return (
       <div>
         <Card
           align="center"
           title="View Ticket"
-          message="View the ticket status"
-          body={<LogoViewTicket />}
-          footer={Search} />
+          subtitle="View the ticket status"
+        >
+            <LogoViewTicket />   
+            <SearchForm
+              name="search"
+              id="search"
+              placeholder="ticket ID"
+              onChange={this.handleChangeInput}
+              onSubmit={this.handleSubmit}
+              value={this.state.ticketId}
+              buttonName="View"
+            />  
+        </Card>
       </div>
     );
   }

@@ -14,9 +14,10 @@ class PageNotFound extends Component {
       <div>
         <Card 
           title="404 - Page not found"
-          message="The page is not found."
-          footer={<Link to="/">Go to home</Link>}
-          />
+        >
+          <p>The page is not found</p>
+          <Link to="/">Go to home</Link>
+        </Card>
       </div>
     );
   }

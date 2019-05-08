@@ -4,16 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './containers/NavBar';
 import Home from './containers/Home/Home';
 import OpenTicket from './containers/OpenTicket/OpenTicket';
-import CardTest from './components/Card';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import PageNotFound from './containers/PageNotFound';
 import ViewRequest from './containers/ViewTicket/ViewTicket';
+import { Container } from 'reactstrap';
 
 function App() {
   return (
     <div className="app">
       <Router>
         <NavBar />
+        <Container>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/open" component={OpenTicket} />
@@ -21,6 +22,7 @@ function App() {
           <Route path="/ticket/" exact component={ () => <Redirect to="/" /> } />
           <Route component={PageNotFound} />
         </Switch>
+        </Container>
       </Router>
     </div>
   );

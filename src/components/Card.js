@@ -23,19 +23,16 @@ class Card extends Component {
 
     return (
       <div>
-        <CardBootstrap className={`${textAlign} card-cust shadow-sm p-3 mb-5 bg-white rounded`} >
+        <CardBootstrap className={`${textAlign} shadow-sm p-3 mb-5 bg-white rounded`} >
           <CardBody>
             <CardTitle>
               <h4>{this.props.title}</h4>
             </CardTitle>
             <CardText>
-              {this.props.message}
+              {this.props.subtitle}
             </CardText>
             <div>
-              {this.props.body}
-            </div>
-            <div>
-              {this.props.footer}
+              {this.props.children}
             </div>
           </CardBody>
         </CardBootstrap>

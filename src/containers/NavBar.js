@@ -43,7 +43,7 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar fixed="top" color="white" expand="sm" className="shadow-sm p-3 mb-5 bg-white rounded">
+        <Navbar fixed="top" color="light" light expand="sm" className="shadow-sm p-3 mb-5 bg-white">
 
           <Container>
             <NavbarBrand onClick={this.closeNavbar} tag={Link} to="/">tick3t</NavbarBrand>

@@ -12,7 +12,8 @@ import {
 import Card from '../../components/Card';
 import DropDown from '../../components/DropDown';
 
-class OpenTicket extends Component {
+
+class CreateTicket extends Component {
   constructor(props) {
     super(props);
 
@@ -32,14 +33,13 @@ class OpenTicket extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   componentDidMount() {
-    fetch("http://localhost:3001/categories", {
+    fetch("http://localhost:3001/categories?type=ticketType", {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then(res => res.json())
       .then((json) => {
         this.setState({
           categories: json
@@ -47,10 +47,11 @@ class OpenTicket extends Component {
       })
       .catch((err) => {
         this.setState({
-          ticketErr: err.message
+          error: err.message
         });
       });
   }
+
 
   handleInputChange(event) {
     const target = event.target;
@@ -62,16 +63,16 @@ class OpenTicket extends Component {
     });
   }
 
+
   handleSubmit(event) {
     event.preventDefault();
 
-    const { ticketId, ticketErr, ...rest } = this.state;
+    const { ticketId, error, categories, ...rest } = this.state;
 
     if (!rest.firstName || !rest.lastName || !rest.email || !rest.message
       || rest.type === '---' || !rest.subject) {
       alert('Form is invalid');
       return;
-
     }
 
     fetch("http://localhost:3001/tickets", {
@@ -79,9 +80,7 @@ class OpenTicket extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(rest)
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then(res => res.json())
       .then((json) => {
         this.setState({
           ticketId: json.id
@@ -89,34 +88,32 @@ class OpenTicket extends Component {
       })
       .catch((err) => {
         this.setState({
-          ticketErr: err.message
+          error: err.message
         });
       });
   }
 
+
   render() {
-
-
-
     if (this.state.ticketId) {
       return (
         <Card title="Ticket Created">
-          <p>{`Ticket ID: ${this.state.ticketId}`}</p>
+          <p>
+            {`Ticket ID: ${this.state.ticketId}`}
+          </p>
         </Card>
       );
-    } else if (this.state.ticketErr) {
+    } else if (this.state.error) {
       return (
         <Card title="Error">
-          <p>{this.state.ticketErr}</p>
+          <p>{this.state.error}</p>
         </Card>
       );
     }
 
-
     return (
       <Card
-        align="left"
-        title="Open Ticket"
+        title="Create Ticket"
       >
         <Form onSubmit={this.handleSubmit}>
           <Row form>
@@ -127,7 +124,7 @@ class OpenTicket extends Component {
                   for="firstName"
                 >
                   First Name
-                      </Label>
+                </Label>
 
                 <Input
                   name="firstName"
@@ -146,7 +143,7 @@ class OpenTicket extends Component {
                   for="lastName"
                 >
                   Last Name
-                      </Label>
+                </Label>
 
                 <Input
                   name="lastName"
@@ -166,7 +163,7 @@ class OpenTicket extends Component {
                   for="email"
                 >
                   Email
-                      </Label>
+                </Label>
 
                 <Input name="email"
                   type="email"
@@ -185,13 +182,14 @@ class OpenTicket extends Component {
                   for="type"
                 >
                   Type
-                      </Label>
+                </Label>
 
-                <DropDown 
+                <DropDown
+                  name="type"
                   options={this.state.categories}
                   value={this.state.type}
                   onChange={this.handleInputChange}
-                  />
+                />
               </FormGroup>
             </Col>
           </Row>
@@ -204,7 +202,7 @@ class OpenTicket extends Component {
                   for="subject"
                 >
                   Subject
-                      </Label>
+                </Label>
 
                 <Input
                   name="subject"
@@ -224,7 +222,7 @@ class OpenTicket extends Component {
                   for="message"
                 >
                   Message
-                      </Label>
+                </Label>
 
                 <Input
                   name="message"
@@ -249,4 +247,4 @@ class OpenTicket extends Component {
   }
 }
 
-export default OpenTicket;
+export default CreateTicket;

@@ -60,6 +60,10 @@ class Table extends Component {
               <td className="font-weight-bold text-right td-key">message</td>
               <td className="td-value text-left">{data.message}</td>
             </tr>
+            <tr>
+              <td className="font-weight-bold text-right td-key">note</td>
+              <td className="td-value text-left">{data.note}</td>
+            </tr>
           </tbody>
         </TableBootstrap>
         </Col>

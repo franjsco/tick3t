@@ -22,18 +22,22 @@ class ViewTicket extends Component {
 
     fetch(`http://localhost:3001/tickets?id=${params.ticketId}`)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
+        if (!response.ok) {
           throw new Error('Error API');
         }
+
+        return response.json();
       })
       .then(json => {
-        if (json.length) {
-          this.setState({ data: json[0], isLoading: false })
-        } else {
+
+        if (!json.length) {
           throw new Error('Ticket Not found');
-        }
+        } 
+
+        this.setState({ 
+          data: json[0], 
+          isLoading: false 
+        })
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
@@ -55,11 +59,14 @@ class ViewTicket extends Component {
 
     return (
       <Card
-        align="center"
         title="View Ticket"
+        headAlign="left"
+        bodyAlign="center"
       >
         <Table data={data} />
-        <Link to="/">Go to home</Link>
+        <Link to="/">
+          Go to home
+        </Link>
       </Card>
     );
   }

@@ -18,7 +18,7 @@ class Card extends Component {
     let bodyAlign;
     let headAlign;
 
-    if (this.props.align) {
+    if (this.props.bodyAlign) {
       bodyAlign = `text-${this.props.bodyAlign}`;
     } 
 

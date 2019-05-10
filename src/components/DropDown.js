@@ -18,7 +18,7 @@ class DropDown extends Component {
 
   return(
     <Input
-      name = "type"
+      name = {this.props.name}
       type = "select"
       value = { this.props.value }
       onChange = { this.props.onChange }

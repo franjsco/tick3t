@@ -15,18 +15,26 @@ class Card extends Component {
   }
 
   render() {
-    let textAlign = "";
+    let bodyAlign;
+    let headAlign;
 
     if (this.props.align) {
-      textAlign = `text-${this.props.align}`;
+      bodyAlign = `text-${this.props.bodyAlign}`;
     } 
 
+    if (this.props.headAlign) {
+      headAlign = `text-${this.props.headAlign}`;
+    }
+
     return (
-      <div>
-        <CardBootstrap className={`${textAlign} shadow-sm p-3 mb-5 bg-white rounded`} >
+        <CardBootstrap 
+          className={`${bodyAlign} shadow-sm p-3 mb-5 bg-white rounded`} 
+        >
           <CardBody>
             <CardTitle>
-              <h4>{this.props.title}</h4>
+              <h4 className={headAlign}>
+                {this.props.title}
+              </h4>
             </CardTitle>
             <CardText>
               {this.props.subtitle}
@@ -36,7 +44,6 @@ class Card extends Component {
             </div>
           </CardBody>
         </CardBootstrap>
-      </div>
     );
   }
 }

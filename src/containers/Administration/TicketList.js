@@ -21,10 +21,11 @@ class TicketList extends Component {
       error: ''
     };
 
+    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3001/tickets?_limit=10`)
+    fetch(`${this.API_URL}tickets?_limit=10`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -35,7 +36,7 @@ class TicketList extends Component {
       .catch(error => this.setState({ error, isLoading: false }));
 
 
-    fetch("http://localhost:3001/categories?type=ticketStatus")
+    fetch(`${this.API_URL}categories?type=ticketStatus`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -59,7 +60,7 @@ class TicketList extends Component {
   render() {
     let tickets = this.state.data;
 
-    if (tickets.length > 0) {
+    if (tickets.length) {
       tickets = tickets.map((ticket) => {
         return (
           <tr>

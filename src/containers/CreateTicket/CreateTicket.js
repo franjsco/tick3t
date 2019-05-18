@@ -31,11 +31,13 @@ class CreateTicket extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
+    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
 
   componentDidMount() {
-    fetch("http://localhost:3001/categories?type=ticketType", {
+    fetch(`${this.API_URL}categories?type=ticketType`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -75,7 +77,7 @@ class CreateTicket extends Component {
       return;
     }
 
-    fetch("http://localhost:3001/tickets", {
+    fetch(`${this.API_URL}tickets`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(rest)

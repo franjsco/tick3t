@@ -16,7 +16,7 @@ import Table from '../../components/Table';
 import DropDown from '../../components/DropDown';
 
 
-class TicketWork extends Component {
+class TicketManager extends Component {
   constructor(props) {
     super(props);
 
@@ -32,6 +32,8 @@ class TicketWork extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
   componentDidMount() {
@@ -39,7 +41,7 @@ class TicketWork extends Component {
 
     const { match: { params } } = this.props;
 
-    fetch(`http://localhost:3001/tickets?id=${params.ticketId}`)
+    fetch(`${this.API_URL}tickets?id=${params.ticketId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -57,7 +59,7 @@ class TicketWork extends Component {
       .catch(error => this.setState({ error, isLoading: false }));
 
 
-    fetch("http://localhost:3001/categories?type=ticketStatus")
+    fetch(`${this.API_URL}categories?type=ticketStatus`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -98,7 +100,7 @@ class TicketWork extends Component {
       return;
     }
 
-    fetch(`http://localhost:3001/tickets/${params.ticketId}`, {
+    fetch(`${this.API_URL}tickets/${params.ticketId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -208,4 +210,4 @@ class TicketWork extends Component {
   }
 }
 
-export default TicketWork;
+export default TicketManager;

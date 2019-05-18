@@ -13,6 +13,8 @@ class ViewTicket extends Component {
       error: '',
       isLoading: false,
     };
+
+    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
   componentDidMount() {
@@ -20,7 +22,7 @@ class ViewTicket extends Component {
 
     const { match: { params } } = this.props;
 
-    fetch(`http://localhost:3001/tickets?id=${params.ticketId}`)
+    fetch(`${this.API_URL}tickets?id=${params.ticketId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Error API');

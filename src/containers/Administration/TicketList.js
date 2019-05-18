@@ -101,7 +101,6 @@ class TicketList extends Component {
           <Col md={3} className="float-right">
             <DropDown
               options={this.state.categories}
-
             />
 
 
@@ -119,7 +118,7 @@ class TicketList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {tickets.length > 0 ? tickets : (
+                {tickets.length ? tickets : (
                   <tr>
                     <td
                       className="text-center font-weight-bold"

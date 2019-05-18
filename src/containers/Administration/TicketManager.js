@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { 
-  Button,
+import {
   Row, 
   Col, 
   Form, 
@@ -14,6 +13,7 @@ import {
 import Card from '../../components/Card';
 import Table from '../../components/Table';
 import DropDown from '../../components/DropDown';
+import Button from '../../components/Button';
 
 
 class TicketManager extends Component {
@@ -196,7 +196,7 @@ class TicketManager extends Component {
             </FormGroup>
             <FormGroup row>
               <Col align="right">
-                <Button type="submit" color="primary">Update Ticket</Button>
+                <Button>Update Ticket</Button>
               </Col>
 
             </FormGroup>

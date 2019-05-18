@@ -5,12 +5,12 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
-  Button
+  Input
 } from 'reactstrap';
 
 import Card from '../../components/Card';
 import DropDown from '../../components/DropDown';
+import Button from '../../components/Button';
 
 
 class CreateTicket extends Component {
@@ -239,7 +239,7 @@ class CreateTicket extends Component {
           <Row form>
             <Col align="center" md={{ size: 8, offset: 2 }}>
               <FormGroup>
-                <Button type="submit" outline color="primary">Open Ticket</Button>
+                <Button>Open Ticket</Button>
               </FormGroup>
             </Col>
           </Row>

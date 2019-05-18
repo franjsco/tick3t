@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
 
 import Card from '../../components/Card';
 import Logo from '../../components/Logo';
+import Button from '../../components/Button';
 
 import logoSVG from '../../assets/assistance.svg';
 
@@ -35,8 +35,6 @@ class CreateTicketCard extends Component {
         <Button
           tag={Link}
           to="/create"
-          color="primary"
-          outline
         >
           Create Ticket
         </Button>

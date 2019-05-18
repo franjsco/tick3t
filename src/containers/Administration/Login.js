@@ -5,11 +5,11 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
-  Button
+  Input
 } from 'reactstrap';
 
 import Card from '../../components/Card';
+import Button from '../../components/Button';
 
 class Login extends Component {
   constructor(props) {
@@ -93,7 +93,7 @@ class Login extends Component {
               </FormGroup>
               
               <FormGroup>
-                <Button type="submit" outline color="primary">Login</Button>
+                <Button>Login</Button>
               </FormGroup>
             </Form>
           </Col>

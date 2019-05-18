@@ -7,10 +7,10 @@ import {
   NavbarBrand,
   NavbarToggler,
   Nav,
-  NavItem,
-  Button
+  NavItem
 } from 'reactstrap';
 
+import Button from '../components/Button';
 import './NavBar.css';
 import logo from '../assets/admin.svg';
 
@@ -75,8 +75,6 @@ class NavBar extends Component {
             
               <NavItem>
                 <Button
-                  color="primary"
-                  outline
                   onClick={this.closeNavbar}
                   tag={Link}
                   to="/login"

@@ -6,6 +6,9 @@ import {
   CardBody
 } from 'reactstrap';
 
+const style = {
+  borderRadius: 10
+};
 
 class Card extends Component {
   constructor(props) {
@@ -28,7 +31,8 @@ class Card extends Component {
 
     return (
         <CardBootstrap 
-          className={`${bodyAlign} shadow-sm p-3 mb-5 bg-white rounded`} 
+          className={`${bodyAlign} shadow-sm p-3 mb-5 bg-white`} 
+          style={style}
         >
           <CardBody>
             <CardTitle>

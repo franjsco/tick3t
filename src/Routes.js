@@ -23,7 +23,8 @@ class Routes extends Component {
 
   render() {
     return (
-      <Router>  
+      <Router> 
+        <Container>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/create" component={CreateTicket} />
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path="/admin/ticket/:ticketId" component={TicketWork} />
             <Route component={PageNotFound} />
           </Switch>
+        </Container> 
           {this.props.children}
       </Router>
     );

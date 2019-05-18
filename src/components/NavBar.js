@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 
 import './NavBar.css';
+import logo from '../assets/admin.svg';
 
 
 class NavBar extends Component {
@@ -70,29 +71,18 @@ class NavBar extends Component {
             isOpen={this.state.isOpen}
             navbar
           >
-            <Nav
-              className="mr-auto"
-              navbar
-            >
-              <NavItem>
-                <NavLink
-                  onClick={this.closeNavbar}
-                  tag={Link}
-                  to="/credits"
-                >
-                  Credits
-                </NavLink>
-              </NavItem>
-            </Nav>
 
-            <Nav className="ml-auto">
+            <Nav className="ml-auto" navbar>
+            
               <NavItem>
                 <Button
                   color="primary"
+                  outline
                   onClick={this.closeNavbar}
                   tag={Link}
                   to="/login"
                 >
+                  <img src={logo} ></img>
                   Admin
                 </Button>
               </NavItem>

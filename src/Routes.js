@@ -11,7 +11,7 @@ import ViewRequest from './containers/ViewTicket/ViewTicket';
 import PageNotFound from './containers/PageNotFound';
 import Login from './containers/Administration/Login';
 import TicketList from './containers/Administration/TicketList';
-import TicketWork from './containers/Administration/TicketManager';
+import TicketManager from './containers/Administration/TicketManager';
 
 
 class Routes extends Component {
@@ -33,7 +33,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/admin/" exact component={() => <Redirect to="/admin/ticket" />} />
             <Route path="/admin/ticket" exact component={TicketList} />
-            <Route path="/admin/ticket/:ticketId" component={TicketWork} />
+            <Route path="/admin/ticket/:ticketId" component={TicketManager} />
             <Route component={PageNotFound} />
           </Switch>
         </Container> 

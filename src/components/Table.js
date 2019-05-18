@@ -23,14 +23,10 @@ class Table extends Component {
         <TableBootstrap bordered id="table-ticket-info" className="bg-white">
           <thead>
             <tr>
-              <th colSpan={2}>Ticket Info</th>
+              <th colSpan={2}>Ticket: {data.id}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="font-weight-bold text-right td-key">id</td>
-              <td className="td-value text-left">{data.id}</td>
-            </tr>
             <tr>
               <td className="font-weight-bold text-right td-key">status</td>
               <td className="td-value text-left">{data.status}</td>

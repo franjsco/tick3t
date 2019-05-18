@@ -237,7 +237,7 @@ class CreateTicket extends Component {
           <Row form>
             <Col align="center" md={{ size: 8, offset: 2 }}>
               <FormGroup>
-                <Button type="submit" color="primary">Open Ticket</Button>
+                <Button type="submit" outline color="primary">Open Ticket</Button>
               </FormGroup>
             </Col>
           </Row>

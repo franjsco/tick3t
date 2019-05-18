@@ -36,6 +36,7 @@ class CreateTicketCard extends Component {
           tag={Link}
           to="/create"
           color="primary"
+          outline
         >
           Create Ticket
         </Button>

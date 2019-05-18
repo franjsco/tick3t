@@ -34,7 +34,8 @@ class SearchForm extends Component {
                     value={this.props.ticketId}
                   />
                   <InputGroupAddon addonType="append">
-                    <Button type="submit" color="primary">{this.props.buttonName}</Button>
+                    <Button type="submit" outline color="primary">
+                   {this.props.buttonName}</Button>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>

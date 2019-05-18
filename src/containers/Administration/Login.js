@@ -93,7 +93,7 @@ class Login extends Component {
               </FormGroup>
               
               <FormGroup>
-                <Button type="submit" color="primary">Login</Button>
+                <Button type="submit" outline color="primary">Login</Button>
               </FormGroup>
             </Form>
           </Col>

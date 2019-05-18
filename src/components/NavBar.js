@@ -81,7 +81,7 @@ class NavBar extends Component {
                   tag={Link}
                   to="/login"
                 >
-                  <img src={logo} ></img>
+                  <img src={logo} alt="admin login"></img>
                   Admin
                 </Button>
               </NavItem>

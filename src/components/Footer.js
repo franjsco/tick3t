@@ -4,10 +4,6 @@ import {
   Col
 } from 'reactstrap';
 
-const style = {
-  textAlign: 'center'
-}
-
 class Footer extends Component {
   constructor(props) {
     super(props);

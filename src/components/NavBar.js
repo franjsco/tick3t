@@ -8,7 +8,6 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
   Button
 } from 'reactstrap';
 

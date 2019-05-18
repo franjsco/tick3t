@@ -17,6 +17,7 @@ class Button extends Component {
   render() {
     return (
       <ButtonBootstrap
+        onClick={this.props.onClick}
         tag={this.props.tag}
         to={this.props.to}
         color="primary"

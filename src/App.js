@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-
+// TODO: implement redux 
 function App() {
   return (
     <div className="app">

@@ -21,7 +21,6 @@ class Button extends Component {
         tag={this.props.tag}
         to={this.props.to}
         color="primary"
-        outline
         style={style}
       >
         {this.props.children}   

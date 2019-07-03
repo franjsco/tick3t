@@ -10,6 +10,8 @@ import {
   Input 
 } from 'reactstrap';
 
+import { config } from '../../config';
+
 import Card from '../../components/Card';
 import Table from '../../components/Table';
 import DropDown from '../../components/DropDown';
@@ -33,7 +35,6 @@ class TicketManager extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
-    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
   componentDidMount() {
@@ -41,7 +42,7 @@ class TicketManager extends Component {
 
     const { match: { params } } = this.props;
 
-    fetch(`${this.API_URL}tickets?id=${params.ticketId}`)
+    fetch(`${config.baseURL}tickets/${params.ticketId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -50,16 +51,16 @@ class TicketManager extends Component {
         return response.json();
       })
       .then(json => {
-        if (!json.length) {
+        if (!json.data) {
           throw new Error('Ticket Not found');
         }
 
-        this.setState({ data: json[0], isLoading: false })
+        this.setState({ data: json.data, isLoading: false })
       })
       .catch(error => this.setState({ error, isLoading: false }));
 
-
-    fetch(`${this.API_URL}categories?type=ticketStatus`)
+    
+    fetch(`${config.baseURL}categories?type=TicketStatus`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -69,14 +70,14 @@ class TicketManager extends Component {
       })
       .then((json) => {
         this.setState({
-          categories: json
+          categories: json.data
         });
       })
       .catch((err) => {
         this.setState({
           error: err.message
         });
-      });
+      }); 
   }
 
   handleInputChange(event) {
@@ -100,8 +101,8 @@ class TicketManager extends Component {
       return;
     }
 
-    fetch(`${this.API_URL}tickets/${params.ticketId}`, {
-      method: 'PATCH',
+    fetch(`${config.baseURL}tickets/${params.ticketId}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         status: this.state.status,
@@ -146,7 +147,7 @@ class TicketManager extends Component {
 
     if (updated) {
       return (
-        <Redirect to="/admin/ticket" />
+        <Redirect to="/admin/" />
       )
     } 
 
@@ -160,7 +161,7 @@ class TicketManager extends Component {
           <Row>
             <Col>
               <Table data={data} />
-              <Link to="/admin/ticket">Go to ticket list</Link>
+              <Link to="/admin/">Go to ticket list</Link>
             </Col>
           </Row>
 
@@ -196,7 +197,7 @@ class TicketManager extends Component {
             </FormGroup>
             <FormGroup row>
               <Col align="right">
-                <Button>Update Ticket</Button>
+                <Button type="submit">Update Ticket</Button>
               </Col>
 
             </FormGroup>

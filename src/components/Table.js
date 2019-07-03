@@ -33,36 +33,36 @@ class Table extends Component {
           <tbody>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">status</td>
-              <td className="td-value text-left">{data.status}</td>
+              <td className="text-left">{data.status}</td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">created</td>
-              <td className="td-value text-left">{data.createdAt}</td>
+              <td className="text-left">{data.createdAt}</td>
             </tr>
             
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">updated</td>
-              <td className="td-value text-left">{data.updateAt}</td>
+              <td className="text-left">{data.updateAt}</td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">created by</td>
-              <td className="td-value text-left"><p>{`${data.firstName} ${data.lastName} (${data.email})`}</p></td>
+              <td className="text-left"><p>{`${data.firstName} ${data.lastName} (${data.email})`}</p></td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">type</td>
-              <td className="td-value text-left">{data.type}</td>
+              <td className="text-left">{data.type}</td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">subject</td>
-              <td className="td-value text-left">{data.subject}</td>
+              <td className="text-left">{data.subject}</td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">message</td>
-              <td className="td-value text-left">{data.message}</td>
+              <td className=" text-left">{data.message}</td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">note</td>
-              <td className="td-value text-left">{data.note}</td>
+              <td className="text-left">{data.note}</td>
             </tr>
           </tbody>
         </TableBootstrap>

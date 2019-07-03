@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -8,6 +9,8 @@ import {
   Input
 } from 'reactstrap';
 
+import { config } from '../../config';
+
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 
@@ -16,20 +19,21 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      err: ''
+      email: null,
+      password: null,
+      error: null,
+      success: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetLogin = this.resetLogin.bind(this);
   }
 
   handleInputChange(event) {
     const target = event.target;
     const name = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-
     this.setState({
       [name]: value
     });
@@ -37,18 +41,78 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    const { email, password } = this.state;
+
+    const body = {
+      email,
+      password
+    }
+
+    fetch(`${config.baseURL}users/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then((json) => {
+        if (!json.success) {
+          this.setState({
+            error: json.message
+          });
+          
+        } else {
+          localStorage.setItem('token', json.token);
+          this.setState({
+            success: true
+          });
+        }
+
+      })
+      .catch((err) => {
+        if (err === 'AuthErr'){
+          this.setState({
+            err: 'auth error'
+          });
+        } else {
+          this.setState({
+            err: err.message
+          });
+        }
+        
+      });
+
+  }
+
+  resetLogin(event) {
+    event.preventDefault();
+
+    this.setState({
+      email: null,
+      password: null,
+      error: null
+    });
   }
 
   render() {
 
-    if (this.state.err) {
+    if (this.state.error) {
       return (
         <Card title="Error">
-          <p>{this.state.err}</p>
+          <p>{this.state.error}</p>
+          <a href="" onClick={this.resetLogin}>Back to login</a>
         </Card>
       );
     }
 
+    if (this.state.success) {
+      return (
+        <Redirect to="/admin/" />
+      )
+    }
+    
     return (
       <Card
         align="left"
@@ -67,31 +131,31 @@ class Login extends Component {
                 >
                   Email
                 </Label>
-                <Input 
-                  type="email" 
-                  name="email" 
-                  id="email" 
-                  onChange={this.handleInputChange} 
+                <Input
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={this.handleInputChange}
                   placeholder="email@email.com"
                 />
               </FormGroup>
-              
+
               <FormGroup>
-                <Label 
-                  className="font-weight-bold" 
+                <Label
+                  className="font-weight-bold"
                   for="password"
                 >
-                    Password
+                  Password
                 </Label>
-                <Input 
-                  onChange={this.handleInputChange} 
-                  type="password" 
-                  name="password" 
-                  id="password" 
+                <Input
+                  onChange={this.handleInputChange}
+                  type="password"
+                  name="password"
+                  id="password"
                   placeholder="your password"
                 />
               </FormGroup>
-              
+
               <FormGroup>
                 <Button>Login</Button>
               </FormGroup>

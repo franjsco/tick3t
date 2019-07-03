@@ -8,11 +8,13 @@ import {
   Input
 } from 'reactstrap';
 
+import { config } from '../../config';
+
 import Card from '../../components/Card';
 import DropDown from '../../components/DropDown';
 import Button from '../../components/Button';
 
-
+// TODO: improve form validation
 class CreateTicket extends Component {
   constructor(props) {
     super(props);
@@ -32,25 +34,22 @@ class CreateTicket extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     
-    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
 
   componentDidMount() {
-    fetch(`${this.API_URL}categories?type=ticketType`, {
+    fetch(`${config.baseURL}categories?type=TicketType`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
       .then((json) => {
         this.setState({
-          categories: json
+          categories: json.data
         });
       })
       .catch((err) => {
-        this.setState({
-          error: err.message
-        });
+        
       });
   }
 
@@ -69,23 +68,34 @@ class CreateTicket extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const { ticketId, error, categories, ...rest } = this.state;
+    // const { ticketId, error, categories, ...rest } = this.state;
 
-    if (!rest.firstName || !rest.lastName || !rest.email || !rest.message
-      || rest.type === '---' || !rest.subject) {
+    const { state } = this;
+
+    if (!state.firstName || !state.lastName || !state.email || !state.message
+      || state.type === '---' || !state.subject) {
       alert('Form is invalid');
       return;
     }
 
-    fetch(`${this.API_URL}tickets`, {
+    const body = {
+        firstName: state.firstName,
+        lastName:  state.lastName,
+        email: state.email,
+        type: state.type,
+        subject: state.subject,
+        message: state.message
+    }
+
+    fetch(`${config.baseURL}tickets`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(rest)
+      body: JSON.stringify(body)
     })
       .then(res => res.json())
       .then((json) => {
         this.setState({
-          ticketId: json.id
+          ticketId: json.data.ticketId
         });
       })
       .catch((err) => {

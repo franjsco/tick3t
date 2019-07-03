@@ -14,6 +14,11 @@ import Button from '../components/Button';
 import './NavBar.css';
 import logo from '../assets/admin.svg';
 
+const styleNavbarBrand = {
+  fontWeight: 'bolder',
+  fontSize: '25px'
+};
+
 
 class NavBar extends Component {
   constructor(props) {
@@ -47,13 +52,12 @@ class NavBar extends Component {
     return (
       <Navbar
         fixed="top"
-        color="light"
-        light
         expand="sm"
-        className="shadow-sm p-3 mb-5 bg-white"
+        className="shadow-sm bg-white"
       >
         <Container>
           <NavbarBrand
+            style={styleNavbarBrand}
             onClick={this.closeNavbar}
             tag={Link}
             to="/"
@@ -72,15 +76,13 @@ class NavBar extends Component {
           >
 
             <Nav className="ml-auto" navbar>
-            
               <NavItem>
                 <Button
                   onClick={this.closeNavbar}
                   tag={Link}
                   to="/login"
                 >
-                  <img src={logo} alt="admin login"></img>
-                  Admin
+                  Login <img src={logo} alt="admin login"></img>
                 </Button>
               </NavItem>
             </Nav>

@@ -7,6 +7,7 @@ import {
   Label,
   Input
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import { config } from '../../config';
 
@@ -33,7 +34,7 @@ class CreateTicket extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
+
   }
 
 
@@ -49,7 +50,7 @@ class CreateTicket extends Component {
         });
       })
       .catch((err) => {
-        
+
       });
   }
 
@@ -79,12 +80,12 @@ class CreateTicket extends Component {
     }
 
     const body = {
-        firstName: state.firstName,
-        lastName:  state.lastName,
-        email: state.email,
-        type: state.type,
-        subject: state.subject,
-        message: state.message
+      firstName: state.firstName,
+      lastName: state.lastName,
+      email: state.email,
+      type: state.type,
+      subject: state.subject,
+      message: state.message
     }
 
     fetch(`${config.baseURL}tickets`, {
@@ -251,6 +252,9 @@ class CreateTicket extends Component {
               <FormGroup>
                 <Button>Open Ticket</Button>
               </FormGroup>
+              <Link to="/">
+                Back to home
+              </Link>
             </Col>
           </Row>
         </Form>

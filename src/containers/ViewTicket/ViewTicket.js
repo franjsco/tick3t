@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { config } from '../../config';
+
 import Card from '../../components/Card';
 import Table from '../../components/Table';
 
@@ -14,7 +16,6 @@ class ViewTicket extends Component {
       isLoading: false,
     };
 
-    this.API_URL= process.env.REACT_APP_API_URL;
   }
 
   componentDidMount() {
@@ -22,7 +23,7 @@ class ViewTicket extends Component {
 
     const { match: { params } } = this.props;
 
-    fetch(`${this.API_URL}tickets?id=${params.ticketId}`)
+    fetch(`${config.baseURL}tickets/${params.ticketId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Error API');
@@ -31,13 +32,13 @@ class ViewTicket extends Component {
         return response.json();
       })
       .then(json => {
-
-        if (!json.length) {
+        console.log()
+        if (!json.success) {
           throw new Error('Ticket Not found');
         } 
 
         this.setState({ 
-          data: json[0], 
+          data: json.data, 
           isLoading: false 
         })
       })

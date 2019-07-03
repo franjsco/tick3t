@@ -31,8 +31,7 @@ class Routes extends Component {
             <Route path="/ticket/:ticketId" component={ViewRequest} />
             <Route path="/ticket/" exact component={() => <Redirect to="/" />} />
             <Route path="/login" component={Login} />
-            <Route path="/admin/" exact component={() => <Redirect to="/admin/ticket" />} />
-            <Route path="/admin/ticket" exact component={TicketList} />
+            <Route path="/admin/" exact component={TicketList} />
             <Route path="/admin/ticket/:ticketId" component={TicketManager} />
             <Route component={PageNotFound} />
           </Switch>

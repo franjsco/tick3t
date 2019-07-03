@@ -16,7 +16,7 @@ class PageNotFound extends Component {
           title="404 - Page not found"
         >
           <p>The page is not found</p>
-          <Link to="/">Go to home</Link>
+          <Link to="/">Back to home</Link>
         </Card>
       </div>
     );

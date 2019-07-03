@@ -68,7 +68,7 @@ class ViewTicket extends Component {
       >
         <Table data={data} />
         <Link to="/">
-          Go to home
+          Back to home
         </Link>
       </Card>
     );

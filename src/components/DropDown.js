@@ -12,9 +12,8 @@ class DropDown extends Component {
   render() {
     let options = this.props.options;
     options = options.map((opt) => {
-      return <option key={opt.id} value={opt.id}>{opt.value}</option>
+      return <option key={opt.name} value={opt.name}>{opt.value}</option>
     });
-    console.log('reh');
 
   return(
     <Input

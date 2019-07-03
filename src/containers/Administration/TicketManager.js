@@ -161,7 +161,7 @@ class TicketManager extends Component {
           <Row>
             <Col>
               <Table data={data} />
-              <Link to="/admin/">Go to ticket list</Link>
+              <Link to="/admin/">Back to Ticket List</Link>
             </Col>
           </Row>
 

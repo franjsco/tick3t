@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-.app {
-  font-family: 'Nunito', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap'); 
+ .app {
+  font-family: 'DM Sans', sans-serif;
   color: #45474b;
   max-width: 1000px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 85px;
 }

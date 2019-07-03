@@ -10,8 +10,6 @@ import {
   Button
 } from 'reactstrap';
 
-//borderBottomRightRadius: 20,
-// borderTopRightRadius: 20
 const style = {
   borderRadius: "0px 20px 20px 0px"
 }
@@ -40,7 +38,7 @@ class SearchForm extends Component {
                     value={this.props.ticketId}
                   />
                   <InputGroupAddon addonType="append">
-                    <Button type="submit" outline color="primary" style={style}>
+                    <Button type="submit" color="primary" style={style}>
                    {this.props.buttonName}</Button>
                   </InputGroupAddon>
                 </InputGroup>

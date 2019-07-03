@@ -7,8 +7,8 @@ import {
 
 
 const tableKeyStyle = {
-  width: '20%',
-  backgroundColor: '#fafafa'
+  width: '18%',
+
 }
 
 class Table extends Component {
@@ -24,44 +24,48 @@ class Table extends Component {
     return (
         <Row>
         <Col sm="12" md={{ size: 10, offset: 1 }}>
-        <TableBootstrap bordered id="table-ticket-info" className="bg-white">
+        <TableBootstrap id="table-ticket-info" className="bg-white">
           <thead>
             <tr>
-              <th colSpan={2}>Ticket ID: {data.ticketId}</th>
+              <th colSpan={2}>Details</th>
             </tr>
           </thead>
           <tbody>
+           <tr>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">id:</td>
+              <td className="text-left">{data.ticketId}</td>
+            </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">status</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">status:</td>
               <td className="text-left">{data.status}</td>
             </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">created</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">created:</td>
               <td className="text-left">{data.createdAt}</td>
             </tr>
             
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">updated</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">updated:</td>
               <td className="text-left">{data.updateAt}</td>
             </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">created by</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">created by:</td>
               <td className="text-left"><p>{`${data.firstName} ${data.lastName} (${data.email})`}</p></td>
             </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">type</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">type:</td>
               <td className="text-left">{data.type}</td>
             </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">subject</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">subject:</td>
               <td className="text-left">{data.subject}</td>
             </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">message</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">message:</td>
               <td className=" text-left">{data.message}</td>
             </tr>
             <tr>
-              <td style={tableKeyStyle} className="font-weight-bold text-right">note</td>
+              <td style={tableKeyStyle} className="font-weight-bold text-right">note:</td>
               <td className="text-left">{data.note}</td>
             </tr>
           </tbody>

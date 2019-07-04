@@ -36,9 +36,9 @@ class Card extends Component {
         >
           <CardBody>
             <CardTitle>
-              <h4 className={headAlign}>
+              <h5 className={headAlign}>
                 {this.props.title}
-              </h4>
+              </h5>
             </CardTitle>
             <CardText>
               {this.props.subtitle}

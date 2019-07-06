@@ -110,7 +110,10 @@ class CreateTicket extends Component {
   render() {
     if (this.state.ticketId) {
       return (
-        <Card title="Ticket Created">
+        <Card 
+          title="Ticket Created"
+          footerLink={{path:"/", name:"Back to home"}}
+        >
           <p>
             {`Ticket ID: ${this.state.ticketId}`}
           </p>
@@ -118,7 +121,10 @@ class CreateTicket extends Component {
       );
     } else if (this.state.error) {
       return (
-        <Card title="Error">
+        <Card 
+          title="Error"
+          footerLink={{path:"/", name:"Back to home"}}
+        >
           <p>{this.state.error}</p>
         </Card>
       );
@@ -127,6 +133,7 @@ class CreateTicket extends Component {
     return (
       <Card
         title="Create Ticket"
+        footerLink={{path:"/", name:"Back to home"}}
       >
         <Form onSubmit={this.handleSubmit}>
           <Row form>
@@ -252,9 +259,6 @@ class CreateTicket extends Component {
               <FormGroup>
                 <Button>Open Ticket</Button>
               </FormGroup>
-              <Link to="/">
-                Back to home
-              </Link>
             </Col>
           </Row>
         </Form>

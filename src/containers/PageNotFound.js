@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 
 class PageNotFound extends Component {
@@ -14,9 +13,9 @@ class PageNotFound extends Component {
       <div>
         <Card 
           title="404 - Page not found"
+          footerLink={{path:"/", name:"Back to home"}}
         >
           <p>The page is not found</p>
-          <Link to="/">Back to home</Link>
         </Card>
       </div>
     );

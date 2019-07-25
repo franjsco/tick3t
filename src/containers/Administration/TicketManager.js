@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 
 import { config } from '../../config';
+import { getAuthHeader } from '../../utils/auth';
 
 import Card from '../../components/Card';
 import Table from '../../components/Table';
@@ -28,7 +29,7 @@ class TicketManager extends Component {
       status: '',
       message: '',
       error: '',
-      updateed: false,
+      updated: false,
       isLoading: false,
     };
 
@@ -101,9 +102,14 @@ class TicketManager extends Component {
       return;
     }
 
+    const header = new Headers();
+
+    header.append('authorization', getAuthHeader());
+    header.append('Content-Type','application/json')
+
     fetch(`${config.baseURL}tickets/${params.ticketId}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: header,
       body: JSON.stringify({
         status: this.state.status,
         note: this.state.message

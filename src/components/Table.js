@@ -46,7 +46,7 @@ class Table extends Component {
             
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">updated:</td>
-              <td className="text-left">{data.updateAt}</td>
+              <td className="text-left">{data.updatedAt}</td>
             </tr>
             <tr>
               <td style={tableKeyStyle} className="font-weight-bold text-right">created by:</td>

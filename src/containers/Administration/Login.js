@@ -9,7 +9,7 @@ import {
   Input
 } from 'reactstrap';
 
-import { config } from '../../config';
+import { login } from '../../api/authentication';
 
 import Card from '../../components/Card';
 import Button from '../../components/Button';
@@ -44,46 +44,24 @@ class Login extends Component {
 
     const { email, password } = this.state;
 
-    const body = {
-      email,
-      password
-    }
-
-    fetch(`${config.baseURL}users/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-      .then(res => {
-        return res.json();
-      })
+    login(email, password)
       .then((json) => {
         if (!json.success) {
           this.setState({
             error: json.message
           });
-          
         } else {
-          localStorage.setItem('token', json.token);
+          localStorage.setItem('user', JSON.stringify(json.data));
           this.setState({
             success: true
           });
         }
-
       })
       .catch((err) => {
-        if (err === 'AuthErr'){
-          this.setState({
-            err: 'auth error'
-          });
-        } else {
-          this.setState({
-            err: err.message
-          });
-        }
-        
+        this.setState({
+          error: err.message
+        });
       });
-
   }
 
   resetLogin(event) {
@@ -97,10 +75,11 @@ class Login extends Component {
   }
 
   render() {
-
     if (this.state.error) {
       return (
-        <Card title="Error">
+        <Card
+          title="Error"
+        >
           <p>{this.state.error}</p>
           <a href="" onClick={this.resetLogin}>Back to login</a>
         </Card>
@@ -112,7 +91,7 @@ class Login extends Component {
         <Redirect to="/admin/" />
       )
     }
-    
+
     return (
       <Card
         align="left"

@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Container } from "reactstrap";
+
 import {
-  Container
-} from 'reactstrap';
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+import { PrivateRoute } from "./PrivateRoute";
 
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { validateUser } from "./utils/auth";
 
-import Home from './containers/HomePage/Home';
-import CreateTicket from './containers/CreateTicket/CreateTicket';
-import ViewRequest from './containers/ViewTicket/ViewTicket';
-import PageNotFound from './containers/PageNotFound';
-import Login from './containers/Administration/Login';
-import TicketList from './containers/Administration/TicketList';
-import TicketManager from './containers/Administration/TicketManager';
-
+import Home from "./containers/HomePage/Home";
+import CreateTicket from "./containers/CreateTicket/CreateTicket";
+import ViewRequest from "./containers/ViewTicket/ViewTicket";
+import PageNotFound from "./containers/PageNotFound";
+import Login from "./containers/Administration/Login";
+import TicketList from "./containers/Administration/TicketList";
+import TicketManager from "./containers/Administration/TicketManager";
 
 class Routes extends Component {
   constructor(props) {
@@ -23,20 +28,28 @@ class Routes extends Component {
 
   render() {
     return (
-      <Router> 
+      <Router>
         <Container>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/create" component={CreateTicket} />
             <Route path="/ticket/:ticketId" component={ViewRequest} />
-            <Route path="/ticket/" exact component={() => <Redirect to="/" />} />
+            <Route
+              path="/ticket/"
+              exact
+              component={() => <Redirect to="/" />}
+            />
             <Route path="/login" component={Login} />
-            <Route path="/admin/" exact component={TicketList} />
-            <Route path="/admin/ticket/:ticketId" component={TicketManager} />
+
+            <PrivateRoute path="/admin/" exact component={TicketList} />
+            <PrivateRoute
+              path="/admin/ticket/:ticketId"
+              component={TicketManager}
+            />
             <Route component={PageNotFound} />
           </Switch>
-        </Container> 
-          {this.props.children}
+        </Container>
+        {this.props.children}
       </Router>
     );
   }

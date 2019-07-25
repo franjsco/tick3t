@@ -17,7 +17,7 @@ class Footer extends Component {
         <Col>
           <p className="text-center">
             <a href="https://github.com/frab1t/tick3t">tick3t</a>{` `}
-            by <a href="https://twitter.com/frab1t">@frab1t</a> (Francesco Esposito)
+            by <a href="https://github.com/frsposito">@frsposito</a> (Francesco Esposito)
           </p>
         </Col>
       </Row>

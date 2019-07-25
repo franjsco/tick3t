@@ -50,7 +50,10 @@ class ViewTicket extends Component {
 
     if (error) {
       return (
-        <Card title="Error">
+        <Card 
+          title="Error"
+          footerLink={{path:"/", name:"Back to home"}}
+        >
           <p>{error.message}</p>
         </Card>
       )

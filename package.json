@@ -2,16 +2,18 @@
   "name": "tick3t",
   "version": "0.1.0",
   "private": true,
-  "author": "frab1t",
+  "author": "frsposito",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
+    "react-reactstrap-pagination": "^1.0.5",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.0",
-    "reactstrap": "^8.0.0"
+    "reactstrap": "^8.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,7 +36,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "json-server": "^0.14.2"
-  }
+  "devDependencies": {}
 }

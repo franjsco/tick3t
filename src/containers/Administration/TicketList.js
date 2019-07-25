@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
   Table
 } from 'reactstrap';
 
-import { Link } from 'react-router-dom';
+import PaginationComponent from "react-reactstrap-pagination";
+
+import { formatDate, decode } from '../../utils/helper';
+import { getTickets, findTicket, filterTicketStatus } from '../../api/tickets';
+import { getAllTicketStatus } from '../../api/categories';
 
 import Card from '../../components/Card';
 import SearchForm from '../../components/SearchForm';
@@ -15,68 +20,108 @@ import DropDown from '../../components/DropDown';
 class TicketList extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      totalPages: 1,
+      selectedPage: 1,
+      selectedStatus: '',
       data: [],
-      categories: [],
+      status: [],
+      type: [],
       error: ''
     };
 
-    this.API_URL= process.env.REACT_APP_API_URL;
+    this.filterId = this.filterId.bind(this);
+    this.filterStatus = this.filterStatus.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelected = this.handleSelected.bind(this);
   }
 
   componentDidMount() {
-    fetch(`${this.API_URL}tickets?_limit=10`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error API');
-        }
-        return response.json();
+    this.setState({ isLoading: true });
+
+    getTickets()
+      .then((json) => {
+        this.setState({ data: json.data, isLoading: false, totalPages: json.totalPages });
       })
-      .then(json => this.setState({ data: json, isLoading: false }))
+      .catch((error) => {
+        this.setState({ error, isLoading: false })
+      });
+
+    getAllTicketStatus()
+      .then((json) => this.setState({ status: json.data }))
       .catch(error => this.setState({ error, isLoading: false }));
 
+  }
 
-    fetch(`${this.API_URL}categories?type=ticketStatus`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error API');
-        }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
 
-        return response.json();
-      })
+    this.setState({
+      ticketId: value
+    });
+  }
+
+
+  filterId(event) {
+    event.preventDefault();
+    this.setState({ isLoading: true });
+
+    const ticketId = this.state.ticketId || '';
+
+    findTicket(ticketId)
+      .then(json => this.setState({ data: json.data, isLoading: false, totalPages: json.totalPages }))
+      .catch(error => this.setState({ error, isLoading: false }));
+  }
+
+
+  filterStatus(event) {
+    const target = event.target;
+    const value = target.value;
+    
+    this.setState({ selectedStatus: value })
+
+    getTickets(1, value)
+      .then(json => this.setState({ data: json.data, isLoading: false, totalPages: json.totalPages, selectedPage: 1 }))
+      .catch(error => this.setState({ error, isLoading: false }));
+  }
+
+  handleSelected(selectedPage) {
+    this.setState( { isLoading: true })
+    const selectedStatus = this.state.selectedStatus;
+    getTickets(selectedPage, selectedStatus)
       .then((json) => {
-        this.setState({
-          categories: json
-        });
+        this.setState({ data: json.data, isLoading: false});
       })
-      .catch((err) => {
-        this.setState({
-          error: err.message
-        });
+      .catch((error) => {
+        this.setState({ error, isLoading: false })
       });
   }
 
 
   render() {
     let tickets = this.state.data;
-
-    if (tickets.length) {
+    if (tickets) {
       tickets = tickets.map((ticket) => {
         return (
-          <tr>
+          <tr key={ticket.ticketId}>
             <th scope="row">
-              <Link to={`/admin/ticket/${ticket.id}`}>
-                {ticket.id}
+              <Link to={`/admin/ticket/${ticket.ticketId}`}>
+                {ticket.ticketId}
               </Link>
             </th>
             <td>
-              {ticket.status}
+              {decode(ticket.status)}
             </td>
             <td>
-              {ticket.type}
+              {decode(ticket.type)}
             </td>
             <td>
               {ticket.subject}
+            </td>
+            <td>
+              {formatDate(ticket.updatedAt)}
             </td>
           </tr>);
       });
@@ -90,9 +135,8 @@ class TicketList extends Component {
               name="search"
               id="search"
               placeholder="ticket ID"
-              onChange={this.handleChangeInput}
-              onSubmit={this.handleSubmit}
-              value={this.state.ticketId}
+              onSubmit={this.filterId}
+              onChange={this.handleInputChange}
               buttonName="Search"
             />
 
@@ -100,7 +144,8 @@ class TicketList extends Component {
           <Col md={5}></Col>
           <Col md={3} className="float-right">
             <DropDown
-              options={this.state.categories}
+              options={this.state.status}
+              onChange={this.filterStatus}
             />
 
 
@@ -108,27 +153,37 @@ class TicketList extends Component {
         </Row>
         <Row>
           <Col>
-            <Table bordered responsive>
+            <Table responsive>
               <thead>
                 <tr>
                   <th>id</th>
                   <th>status</th>
                   <th>type</th>
                   <th>subject</th>
+                  <th>updated</th>
                 </tr>
               </thead>
               <tbody>
-                {tickets.length ? tickets : (
+                {tickets || (
                   <tr>
                     <td
                       className="text-center font-weight-bold"
-                      colspan="4"
+                      colspan="5"
                     >
                       no ticket
                     </td>
                   </tr>)}
               </tbody>
             </Table>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <PaginationComponent
+              totalItems={this.state.totalPages}
+              pageSize={1}
+              onSelect={this.handleSelected}
+            />
           </Col>
         </Row>
       </Card>

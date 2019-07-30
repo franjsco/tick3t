@@ -29,7 +29,9 @@ class SearchTicketCard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    
+    if (!this.state.ticketId) return null;
+    
     this.setState({
       submitted: true
     });

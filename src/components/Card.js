@@ -12,6 +12,10 @@ const style = {
   borderRadius: 10
 };
 
+const styleCardTitle = {
+  fontWeight: '600'
+}
+
 class Card extends Component {
   constructor(props) {
     super(props);
@@ -37,8 +41,8 @@ class Card extends Component {
         style={style}
       >
         <CardBody>
-          <CardTitle>
-            <h5 className={headAlign}>
+          <CardTitle className={styleCardTitle}>
+            <h5 style={styleCardTitle} className={headAlign}>
               {this.props.title}
             </h5>
           </CardTitle>

@@ -11,7 +11,8 @@ import {
 } from 'reactstrap';
 
 const style = {
-  borderRadius: "0px 20px 20px 0px"
+  borderRadius: "0px 20px 20px 0px",
+  backgroundImage: 'linear-gradient(to left, #0eaed3, #8346f6)',
 }
 
 class SearchForm extends Component {
@@ -38,8 +39,8 @@ class SearchForm extends Component {
                     value={this.props.ticketId}
                   />
                   <InputGroupAddon addonType="append">
-                    <Button type="submit" color="primary" style={style}>
-                   {this.props.buttonName}</Button>
+                    <Button type="submit" style={style}>
+                      {this.props.buttonName}</Button>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>

@@ -10,22 +10,18 @@ import {
   NavItem
 } from 'reactstrap';
 
+import { isLogin } from '../utils/auth';
+
 import Button from '../components/Button';
 import './NavBar.css';
 import logo from '../assets/admin.svg';
-
-const styleNavbarBrand = {
-  fontWeight: 'bolder',
-  fontSize: '25px'
-};
-
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
 
     // binding
@@ -57,8 +53,8 @@ class NavBar extends Component {
       >
         <Container>
           <NavbarBrand
-            style={styleNavbarBrand}
             onClick={this.closeNavbar}
+            className="title"
             tag={Link}
             to="/"
           >
@@ -77,13 +73,25 @@ class NavBar extends Component {
 
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Button
-                  onClick={this.closeNavbar}
-                  tag={Link}
-                  to="/login"
-                >
-                  Login <img src={logo} alt="admin login"></img>
-                </Button>
+                {
+                  isLogin() ? (
+                    <Button
+                      onClick={this.closeNavbar}
+                      tag={Link}
+                      to="/logout"
+                    >
+                      Logout
+                  </Button>
+                  ) : (
+                      <Button
+                        onClick={this.closeNavbar}
+                        tag={Link}
+                        to="/login"
+                      >
+                        Login <img src={logo} alt="admin login"></img>
+                      </Button>
+                    )
+                }
               </NavItem>
             </Nav>
           </Collapse>

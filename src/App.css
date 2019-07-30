@@ -1,8 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap'); 
- .app {
-  font-family: 'DM Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+.app {
+  font-family: 'Comfortaa', sans-serif;
   color: #45474b;
   max-width: 1000px;
   margin: auto;
   margin-top: 85px;
+}
+
+
+a {
+  color: #8346f6;
+  font-weight: 600
+}
+
+.page-item.active .page-link {
+
+  z-index: 1;
+  color: #fff;
+  background-color: #8346f6;
+  border-color:#8346f6;
+}
+
+.page-link {
+  color: #8346f6;
 }

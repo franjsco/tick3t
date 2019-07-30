@@ -4,7 +4,8 @@ import {
 } from 'reactstrap';
 
 const style = {
-  borderRadius: 20
+  borderRadius: 20,
+  backgroundImage: 'linear-gradient(to left, #0eaed3, #8346f6)'
 };
 
 class Button extends Component {
@@ -20,12 +21,11 @@ class Button extends Component {
         onClick={this.props.onClick}
         tag={this.props.tag}
         to={this.props.to}
-        color="primary"
         style={style}
       >
-        {this.props.children}   
+        {this.props.children}
       </ButtonBootstrap>
-      
+
     );
   }
 }

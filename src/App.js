@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
 
 import Routes from './Routes';
 import NavBar from './components/NavBar';
@@ -13,11 +14,11 @@ function App() {
     <div className="app">
       <Routes>
         <NavBar />
-        
+
         <Container>
           <Footer />
         </Container>
-       
+
       </Routes>
     </div>
   );

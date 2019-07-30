@@ -6,6 +6,7 @@ import {
   Table
 } from 'reactstrap';
 
+
 import PaginationComponent from "react-reactstrap-pagination";
 
 import { formatDate, decode } from '../../utils/helper';
@@ -17,6 +18,10 @@ import SearchForm from '../../components/SearchForm';
 import DropDown from '../../components/DropDown';
 
 
+const paginationStyle = {
+  backgroundColor: '#8346f6',
+  borderColor: '#8346f6'
+};
 class TicketList extends Component {
   constructor(props) {
     super(props);
@@ -79,7 +84,7 @@ class TicketList extends Component {
   filterStatus(event) {
     const target = event.target;
     const value = target.value;
-    
+
     this.setState({ selectedStatus: value })
 
     getTickets(1, value)
@@ -88,11 +93,11 @@ class TicketList extends Component {
   }
 
   handleSelected(selectedPage) {
-    this.setState( { isLoading: true })
+    this.setState({ isLoading: true })
     const selectedStatus = this.state.selectedStatus;
     getTickets(selectedPage, selectedStatus)
       .then((json) => {
-        this.setState({ data: json.data, isLoading: false});
+        this.setState({ data: json.data, isLoading: false });
       })
       .catch((error) => {
         this.setState({ error, isLoading: false })
@@ -180,6 +185,7 @@ class TicketList extends Component {
         <Row>
           <Col>
             <PaginationComponent
+              style={paginationStyle}
               totalItems={this.state.totalPages}
               pageSize={1}
               onSelect={this.handleSelected}

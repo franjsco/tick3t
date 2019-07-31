@@ -4,8 +4,7 @@ import { Redirect } from 'react-router-dom';
 import Card from '../../components/Card';
 import SearchForm from '../../components/SearchForm';
 import Logo from '../../components/Logo';
-
-import logoSVG from '../../assets/ticket.svg';
+import logoSearchTicket from '../../assets/search_ticket.svg';
 
 
 const style = {
@@ -57,10 +56,9 @@ class SearchTicketCard extends Component {
       >
         <Logo
           style={style}
-          src={logoSVG}
+          src={logoSearchTicket}
           alt="Search Ticket" 
         />
-
         <SearchForm
           name="search"
           id="search"

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import {
   Container,
+  Row,
+  NavLink,
   Collapse,
   Navbar,
   NavbarBrand,
@@ -72,17 +74,30 @@ class NavBar extends Component {
           >
 
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                {
-                  this.props.loggedIn ? (
-                    <Button
-                      onClick={this.closeNavbar}
-                      tag={Link}
-                      to="/logout"
-                    >
-                      Logout
-                  </Button>
-                  ) : (
+
+              {
+                this.props.loggedIn ? (
+                  <Row>
+
+                    <NavItem>
+                      <NavLink tag={Link} to='/admin/'>Tickets</NavLink>
+                    </NavItem>
+
+                    <NavItem>
+                      <NavLink tag={Link} to='/admin/settings'>Settings</NavLink>
+                    </NavItem>
+
+                    <NavItem>
+                      <Button
+                        onClick={this.closeNavbar}
+                        tag={Link}
+                        to="/logout"
+                      >
+                        Logout
+                      </Button>
+                    </NavItem>
+                  </Row>) : (
+                    <NavItem>
                       <Button
                         onClick={this.closeNavbar}
                         tag={Link}
@@ -90,9 +105,12 @@ class NavBar extends Component {
                       >
                         Login <img src={logo} alt="admin login"></img>
                       </Button>
-                    )
-                }
-              </NavItem>
+                    </NavItem>
+
+                  )
+              }
+
+
             </Nav>
           </Collapse>
         </Container>
@@ -114,4 +132,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

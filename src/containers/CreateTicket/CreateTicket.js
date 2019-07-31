@@ -7,9 +7,9 @@ import {
   Label,
   Input
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
-import { config } from '../../config';
+import { createTicket } from '../../api/tickets';
+import { getAllTicketType } from '../../api/categories';
 
 import Card from '../../components/Card';
 import DropDown from '../../components/DropDown';
@@ -29,7 +29,8 @@ class CreateTicket extends Component {
       type: '',
       subject: '',
       message: '',
-      categories: []
+      categories: [],
+      error: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -39,19 +40,9 @@ class CreateTicket extends Component {
 
 
   componentDidMount() {
-    fetch(`${config.baseURL}categories?type=TicketType`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(res => res.json())
-      .then((json) => {
-        this.setState({
-          categories: json.data
-        });
-      })
-      .catch((err) => {
-
-      });
+    getAllTicketType()
+      .then(json => this.setState({ categories: json.data }))
+      .catch(error => this.setState({ error }));
   }
 
 
@@ -68,9 +59,7 @@ class CreateTicket extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    // const { ticketId, error, categories, ...rest } = this.state;
-
+    
     const { state } = this;
 
     if (!state.firstName || !state.lastName || !state.email || !state.message
@@ -79,7 +68,7 @@ class CreateTicket extends Component {
       return;
     }
 
-    const body = {
+    const ticket = {
       firstName: state.firstName,
       lastName: state.lastName,
       email: state.email,
@@ -88,24 +77,12 @@ class CreateTicket extends Component {
       message: state.message
     }
 
-    fetch(`${config.baseURL}tickets`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-      .then(res => res.json())
-      .then((json) => {
-        this.setState({
-          ticketId: json.data.ticketId
-        });
+    createTicket(ticket)
+      .then(json => {
+        this.setState( { ticketId: json.data.ticketId });
       })
-      .catch((err) => {
-        this.setState({
-          error: err.message
-        });
-      });
+      .catch(error => this.setState({error: error.message}));
   }
-
 
   render() {
     if (this.state.ticketId) {

@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import {
-  Row, 
-  Col, 
-  Form, 
-  FormGroup, 
-  Label, 
-  Input 
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input
 } from 'reactstrap';
 
-import { config } from '../../config';
-import { getAuthHeader } from '../../utils/auth';
+import { getAllTicketStatus } from '../../api/categories';
+import { viewTicket, updateTicket } from '../../api/tickets';
 
 import Card from '../../components/Card';
 import Table from '../../components/Table';
@@ -27,7 +27,7 @@ class TicketManager extends Component {
       data: {},
       categories: [],
       status: '',
-      message: '',
+      note: '',
       error: '',
       updated: false,
       isLoading: false,
@@ -42,7 +42,7 @@ class TicketManager extends Component {
     this.setState({ isLoading: true });
 
     const { match: { params } } = this.props;
-
+    /*
     fetch(`${config.baseURL}tickets/${params.ticketId}`)
       .then(response => {
         if (!response.ok) {
@@ -59,26 +59,15 @@ class TicketManager extends Component {
         this.setState({ data: json.data, isLoading: false })
       })
       .catch(error => this.setState({ error, isLoading: false }));
+      */
 
-    
-    fetch(`${config.baseURL}categories?type=TicketStatus`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error API');
-        }
+    viewTicket(params.ticketId)
+      .then((json) => this.setState({ data: json.data, isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }));
 
-        return response.json();
-      })
-      .then((json) => {
-        this.setState({
-          categories: json.data
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.message
-        });
-      }); 
+    getAllTicketStatus()
+      .then((json) => this.setState({ categories: json.data }))
+      .catch(error => this.setState({ error, isLoading: false }));
   }
 
   handleInputChange(event) {
@@ -91,53 +80,35 @@ class TicketManager extends Component {
     });
   }
 
-
   handleSubmit(event) {
     event.preventDefault();
     const data = this.state;
     const { match: { params } } = this.props;
 
-    if (!data.type === '---' || !data.message) {
+    if (!data.type === '---' || !data.note) {
       alert('Form is invalid');
       return;
     }
 
-    const header = new Headers();
+    const ticket = {
+      ticketId: params.ticketId,
+      status: data.status,
+      note: data.note
+    };
 
-    header.append('authorization', getAuthHeader());
-    header.append('Content-Type','application/json')
-
-    fetch(`${config.baseURL}tickets/${params.ticketId}`, {
-      method: 'PUT',
-      headers: header,
-      body: JSON.stringify({
-        status: this.state.status,
-        note: this.state.message
-      })
-    })
-      .then(res => {
-        if(!res.ok) {
-          throw new Error('Error API');
-        }
-
-        return res.json();
-      })
-      .then((json) => {
-        alert("Ticket Updated");
+    updateTicket(ticket)
+      .then(json => {
+        alert('Ticket Update');
         this.setState({
           updated: true
         });
       })
-      .catch((err) => {
-        this.setState({
-          ticketErr: err.message
-        });
-      });
+      .catch(err => this.setState({ ticketErr: err.message }));
   }
 
 
   render() {
-    const { data, updated, isLoading, error} = this.state;
+    const { data, updated, isLoading, error } = this.state;
 
     if (error) {
       return (
@@ -155,7 +126,7 @@ class TicketManager extends Component {
       return (
         <Redirect to="/admin/" />
       )
-    } 
+    }
 
     return (
       <div>
@@ -170,7 +141,6 @@ class TicketManager extends Component {
               <Link to="/admin/">Back to Ticket List</Link>
             </Col>
           </Row>
-
         </Card>
 
         <Card
@@ -190,12 +160,12 @@ class TicketManager extends Component {
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label sm={2} className="font-weight-bold" for="message">Note</Label>
+              <Label sm={2} className="font-weight-bold" for="note">Note</Label>
               <Col sm={10}>
                 <Input
-                  name="message"
+                  name="note"
                   type="textarea"
-                  value={this.state.message}
+                  value={this.state.note}
                   onChange={this.handleInputChange}
                   placeholder="Note"
                 />
@@ -205,11 +175,8 @@ class TicketManager extends Component {
               <Col align="right">
                 <Button type="submit">Update Ticket</Button>
               </Col>
-
             </FormGroup>
-
           </Form>
-
         </Card>
 
       </div>

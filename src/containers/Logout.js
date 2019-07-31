@@ -11,10 +11,10 @@ const Logout = (props) => {
   return (
     <div>
       <Card
-        title="Logout"
+        title="Logout Success"
         footerLink={{ path: "/", name: "Go to home" }}
       >
-        <p>Logout ok</p>
+        <p>You have been logged out successfully</p>
       </Card>
     </div>
   );

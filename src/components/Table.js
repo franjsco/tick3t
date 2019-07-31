@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Col,
   Row,
   Table as TableBootstrap
 } from 'reactstrap';
 
+import { formatStatus, formatDate } from '../utils/helper';
 
 const tableKeyStyle = {
   width: '18%',
   color: '#45474b'
 }
 
-class Table extends Component {
-  constructor(props) {
-    super(props);
+const Table = (props) => {
+  const data = props.data;
 
-    this.state = {};
-  }
-
-  render() {
-    let data = this.props.data;
-
+  if (data) {
     return (
       <Row>
         <Col sm="12" md={{ size: 10, offset: 1 }}>
@@ -37,16 +32,16 @@ class Table extends Component {
               </tr>
               <tr>
                 <td style={tableKeyStyle} className="font-weight-bold text-right">status:</td>
-                <td className="text-left">{data.status}</td>
+                <td className="text-left">{formatStatus(data.status)}</td>
               </tr>
               <tr>
                 <td style={tableKeyStyle} className="font-weight-bold text-right">created:</td>
-                <td className="text-left">{data.createdAt}</td>
+                <td className="text-left">{formatDate(data.createdAt)}</td>
               </tr>
 
               <tr>
                 <td style={tableKeyStyle} className="font-weight-bold text-right">updated:</td>
-                <td className="text-left">{data.updatedAt}</td>
+                <td className="text-left">{formatDate(data.updatedAt)}</td>
               </tr>
               <tr>
                 <td style={tableKeyStyle} className="font-weight-bold text-right">created by:</td>
@@ -73,6 +68,8 @@ class Table extends Component {
         </Col>
       </Row>
     );
+  } else {
+    return (null);
   }
 }
 

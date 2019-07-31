@@ -4,17 +4,12 @@ A simple ticketing system
 
 ![tomadoro screenshot](screenshot.png) 
 
-Technologies: 
-* HTML5 and CSS
-* JavaScript 
-* React.js
-* Bootstrap (reactstrap)
 
 ## Demo
-Try tomadoro: ---
+Try tick3t: ---
 
 ## License
 GPLv3
 
 ---
-Made with ❤️ by Francesco Esposito ([@frab1t](https://github.com/frab1t))
+Made with ❤️ by Francesco Esposito ([@frsposito](https://github.com/frsposito))

@@ -16,14 +16,14 @@ function login(email, password) {
   return fetch(`${config.baseURL}users/login`, options)
     .then(handleResponse)
     .then(user => {
-      localStorage.setItem('user', JSON.stringify(user));
+      sessionStorage.setItem('user', JSON.stringify(user));
       return user;
     });
 };
 
 
 function logout() {
-  localStorage.removeItem('user');
+  sessionStorage.removeItem('user');
 }
 
 

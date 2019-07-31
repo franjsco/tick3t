@@ -9,8 +9,8 @@ import {
 
 import PaginationComponent from "react-reactstrap-pagination";
 
-import { formatDate, decode } from '../../utils/helper';
-import { getTickets, findTicket, filterTicketStatus } from '../../api/tickets';
+import { formatDate, formatStatus } from '../../utils/helper';
+import { getTickets, viewTicket, findTicket} from '../../api/tickets';
 import { getAllTicketStatus } from '../../api/categories';
 
 import Card from '../../components/Card';
@@ -40,6 +40,7 @@ class TicketList extends Component {
     this.filterStatus = this.filterStatus.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
+    this.resetError = this.resetError.bind(this);
   }
 
   componentDidMount() {
@@ -88,7 +89,11 @@ class TicketList extends Component {
     this.setState({ selectedStatus: value })
 
     getTickets(1, value)
-      .then(json => this.setState({ data: json.data, isLoading: false, totalPages: json.totalPages, selectedPage: 1 }))
+      .then(json => this.setState({ 
+        data: json.data, 
+        isLoading: false, 
+        totalPages: json.totalPages, 
+        selectedPage: 1 }))
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
@@ -104,8 +109,22 @@ class TicketList extends Component {
       });
   }
 
+  resetError() {
+    this.setState({error: ''});
+  }
 
   render() {
+
+    if (this.state.error) {
+      return (
+        <Card
+          title="Error"
+        >
+          <p>{this.state.error.message}</p>
+        </Card>
+      )
+    }
+
     let tickets = this.state.data;
     if (tickets) {
       tickets = tickets.map((ticket) => {
@@ -117,10 +136,10 @@ class TicketList extends Component {
               </Link>
             </th>
             <td>
-              {decode(ticket.status)}
+              {formatStatus(ticket.status)}
             </td>
             <td>
-              {decode(ticket.type)}
+              {formatStatus(ticket.type)}
             </td>
             <td>
               {ticket.subject}

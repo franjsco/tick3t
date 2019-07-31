@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userActions } from '../_actions';
 import {
   Container,
   Collapse,
@@ -9,8 +11,6 @@ import {
   Nav,
   NavItem
 } from 'reactstrap';
-
-import { isLogin } from '../utils/auth';
 
 import Button from '../components/Button';
 import './NavBar.css';
@@ -74,7 +74,7 @@ class NavBar extends Component {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 {
-                  isLogin() ? (
+                  this.props.loggedIn ? (
                     <Button
                       onClick={this.closeNavbar}
                       tag={Link}
@@ -101,4 +101,17 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.user.loggedIn,
+    error: state.user.error
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(userActions.logout())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (NavBar);

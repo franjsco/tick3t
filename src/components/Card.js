@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Card as CardBootstrap,
   CardTitle,
@@ -16,55 +16,47 @@ const styleCardTitle = {
   fontWeight: '600'
 }
 
-class Card extends Component {
-  constructor(props) {
-    super(props);
+const Card = (props) => {
+  let bodyAlign;
+  let headAlign;
 
-    this.state = {};
+  if (props.bodyAlign) {
+    bodyAlign = `text-${props.bodyAlign}`;
   }
 
-  render() {
-    let bodyAlign;
-    let headAlign;
-
-    if (this.props.bodyAlign) {
-      bodyAlign = `text-${this.props.bodyAlign}`;
-    }
-
-    if (this.props.headAlign) {
-      headAlign = `text-${this.props.headAlign}`;
-    }
-
-    return (
-      <CardBootstrap
-        className={`${bodyAlign} shadow-sm p-3 mb-5 bg-white`}
-        style={style}
-      >
-        <CardBody>
-          <CardTitle className={styleCardTitle}>
-            <h5 style={styleCardTitle} className={headAlign}>
-              {this.props.title}
-            </h5>
-          </CardTitle>
-          <CardText>
-            {this.props.subtitle}
-          </CardText>
-          <div>
-            {this.props.children}
-          </div>
-          {
-            this.props.footerLink && (
-              <div className={`text-${this.props.footerLink.align || 'center'}`}>
-                <Link to={this.props.footerLink.path}>
-                  {this.props.footerLink.name}
-                </Link>
-              </div>)
-          }
-
-        </CardBody>
-      </CardBootstrap>
-    );
+  if (props.headAlign) {
+    headAlign = `text-${props.headAlign}`;
   }
-}
+
+  return (
+    <CardBootstrap
+      className={`${bodyAlign} shadow-sm p-3 mb-5 bg-white`}
+      style={style}
+    >
+      <CardBody>
+        <CardTitle className={styleCardTitle}>
+          <h5 style={styleCardTitle} className={headAlign}>
+            {props.title}
+          </h5>
+        </CardTitle>
+        <CardText>
+          {props.subtitle}
+        </CardText>
+        <div>
+          {props.children}
+        </div>
+        {
+          props.footerLink && (
+            <div className={`text-${props.footerLink.align || 'center'}`}>
+              <Link to={props.footerLink.path}>
+                {props.footerLink.name}
+              </Link>
+            </div>)
+        }
+
+      </CardBody>
+    </CardBootstrap>
+  );
+};
 
 export default Card;

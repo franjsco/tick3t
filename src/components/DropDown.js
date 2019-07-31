@@ -1,32 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Input } from 'reactstrap';
 
 
-class DropDown extends Component {
-  constructor(props) {
-    super(props);
+const DropDown = (props) => {
+  let options = props.options;
+  options = options.map((opt) => {
+    return <option key={opt.name} value={opt.name}>{opt.value}</option>
+  });
 
-    this.state = {};
-  }
-
-  render() {
-    let options = this.props.options;
-    options = options.map((opt) => {
-      return <option key={opt.name} value={opt.name}>{opt.value}</option>
-    });
-
-  return(
+  return (
     <Input
-      name = {this.props.name}
-      type = "select"
-      value = { this.props.value }
-      onChange = { this.props.onChange }
+      name={props.name}
+      type="select"
+      value={props.value}
+      onChange={props.onChange}
     >
       <option value="">---</option>
-      { options }
+      {options}
     </Input>
-    );
-  }
+  );
 }
 
 export default DropDown;

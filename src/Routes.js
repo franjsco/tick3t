@@ -1,28 +1,25 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
-
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
 } from "react-router-dom";
+import { Container } from "reactstrap";
+
 import { PrivateRoute } from "./PrivateRoute";
-
-import { validateUser } from "./utils/auth";
-
 import Home from "./containers/HomePage/Home";
 import CreateTicket from "./containers/CreateTicket/CreateTicket";
 import ViewRequest from "./containers/ViewTicket/ViewTicket";
 import PageNotFound from "./containers/PageNotFound";
 import Login from "./containers/Administration/Login";
+import Logout from "./containers/Logout";
 import TicketList from "./containers/Administration/TicketList";
 import TicketManager from "./containers/Administration/TicketManager";
 
 class Routes extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
@@ -42,10 +39,8 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
 
             <PrivateRoute path="/admin/" exact component={TicketList} />
-            <PrivateRoute
-              path="/admin/ticket/:ticketId"
-              component={TicketManager}
-            />
+            <PrivateRoute path="/admin/ticket/:ticketId" component={TicketManager} />
+            <PrivateRoute path="/logout" component={Logout} />
             <Route component={PageNotFound} />
           </Switch>
         </Container>

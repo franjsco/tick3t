@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userActions } from '../../_actions';
 import {
   Row,
   Col,
@@ -8,8 +10,6 @@ import {
   Label,
   Input
 } from 'reactstrap';
-
-import { login } from '../../api/authentication';
 
 import Card from '../../components/Card';
 import Button from '../../components/Button';
@@ -44,49 +44,29 @@ class Login extends Component {
 
     const { email, password } = this.state;
 
-    login(email, password)
-      .then((json) => {
-        if (!json.success) {
-          this.setState({
-            error: json.message
-          });
-        } else {
-          localStorage.setItem('user', JSON.stringify(json.data));
-          this.setState({
-            success: true
-          });
-        }
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.message
-        });
-      });
+    this.props.login(email, password);
+    
   }
 
   resetLogin(event) {
     event.preventDefault();
 
-    this.setState({
-      email: null,
-      password: null,
-      error: null
-    });
+    this.props.reset();
   }
 
   render() {
-    if (this.state.error) {
+    if (this.props.error) {
       return (
         <Card
           title="Error"
         >
-          <p>{this.state.error}</p>
-          <a href="" onClick={this.resetLogin}>Back to login</a>
+          <p>{this.props.error}</p>
+          <a href="/" onClick={this.resetLogin}>Back to login</a>
         </Card>
       );
     }
 
-    if (this.state.success) {
+    if (this.props.loggedIn) {
       return (
         <Redirect to="/admin/" />
       )
@@ -146,4 +126,18 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.user.loggedIn,
+    error: state.user.error
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email, password) => dispatch(userActions.login(email, password)),
+    reset: () => dispatch(userActions.reset())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Login);

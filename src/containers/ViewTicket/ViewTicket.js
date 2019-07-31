@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { config } from '../../config';
+import { viewTicket } from '../../api/tickets';
 
 import Card from '../../components/Card';
 import Table from '../../components/Table';
@@ -11,11 +11,10 @@ class ViewTicket extends Component {
     super(props);
 
     this.state = {
-      data: {},
+      data: '',
       error: '',
       isLoading: false,
     };
-
   }
 
   componentDidMount() {
@@ -23,25 +22,8 @@ class ViewTicket extends Component {
 
     const { match: { params } } = this.props;
 
-    fetch(`${config.baseURL}tickets/${params.ticketId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error API');
-        }
-
-        return response.json();
-      })
-      .then(json => {
-        console.log()
-        if (!json.success) {
-          throw new Error('Ticket Not found');
-        } 
-
-        this.setState({ 
-          data: json.data, 
-          isLoading: false 
-        })
-      })
+    viewTicket(params.ticketId)
+      .then((json) => this.setState({ data: json.data, isLoading: false }))
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
@@ -50,9 +32,9 @@ class ViewTicket extends Component {
 
     if (error) {
       return (
-        <Card 
+        <Card
           title="Error"
-          footerLink={{path:"/", name:"Back to home"}}
+          footerLink={{ path: "/", name: "Back to home" }}
         >
           <p>{error.message}</p>
         </Card>

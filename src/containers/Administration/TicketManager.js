@@ -30,7 +30,6 @@ class TicketManager extends Component {
       note: '',
       error: '',
       updated: false,
-      isLoading: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,35 +38,15 @@ class TicketManager extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
-
     const { match: { params } } = this.props;
-    /*
-    fetch(`${config.baseURL}tickets/${params.ticketId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error API');
-        }
-
-        return response.json();
-      })
-      .then(json => {
-        if (!json.data) {
-          throw new Error('Ticket Not found');
-        }
-
-        this.setState({ data: json.data, isLoading: false })
-      })
-      .catch(error => this.setState({ error, isLoading: false }));
-      */
 
     viewTicket(params.ticketId)
-      .then((json) => this.setState({ data: json.data, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+      .then((json) => this.setState({ data: json.data}))
+      .catch(error => this.setState({ error }));
 
     getAllTicketStatus()
       .then((json) => this.setState({ categories: json.data }))
-      .catch(error => this.setState({ error, isLoading: false }));
+      .catch(error => this.setState({ error }));
   }
 
   handleInputChange(event) {
@@ -108,7 +87,7 @@ class TicketManager extends Component {
 
 
   render() {
-    const { data, updated, isLoading, error } = this.state;
+    const { data, updated, error } = this.state;
 
     if (error) {
       return (
@@ -118,9 +97,6 @@ class TicketManager extends Component {
       )
     }
 
-    if (isLoading) {
-      return '' // add spinner
-    }
 
     if (updated) {
       return (

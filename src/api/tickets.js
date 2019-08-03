@@ -12,7 +12,13 @@ export const getTickets = (page = 1, status = '') => {
     headers: header
   };
 
-  return fetch(`${config.baseURL}tickets?page=${page}&status=${status}`, options)
+  let url = `${config.baseURL}tickets?page=${page}`;
+  
+  if (status) {
+    url += `&status=${status}`;
+  }
+
+  return fetch(url, options)
     .then(res => {
       if (res.ok) {
         return res.json();

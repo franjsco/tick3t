@@ -42,7 +42,7 @@ class CreateTicket extends Component {
   componentDidMount() {
     getAllTicketType()
       .then(json => this.setState({ categories: json.data }))
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error: error.message }));
   }
 
 

@@ -4,9 +4,12 @@ import { Input } from 'reactstrap';
 
 const DropDown = (props) => {
   let options = props.options;
-  options = options.map((opt) => {
-    return <option key={opt.name} value={opt.name}>{opt.value}</option>
-  });
+  if (options) { 
+    options = options.map((opt) => {
+      return <option key={opt.name} value={opt.name}>{opt.value}</option>
+    });
+  }
+  
 
   return (
     <Input

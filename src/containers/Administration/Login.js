@@ -44,8 +44,9 @@ class Login extends Component {
 
     const { email, password } = this.state;
 
-    this.props.login(email, password);
-    
+    if (email && password) {
+      this.props.login(email, password);
+    }
   }
 
   resetLogin(event) {

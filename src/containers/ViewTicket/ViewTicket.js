@@ -13,22 +13,19 @@ class ViewTicket extends Component {
     this.state = {
       data: '',
       error: '',
-      isLoading: false,
     };
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
-
     const { match: { params } } = this.props;
 
     viewTicket(params.ticketId)
-      .then((json) => this.setState({ data: json.data, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+      .then(json => this.setState({ data: json.data}))
+      .catch(error => this.setState({ error}));
   }
 
   render() {
-    const { data, isLoading, error } = this.state;
+    const { data, error } = this.state;
 
     if (error) {
       return (
@@ -39,10 +36,6 @@ class ViewTicket extends Component {
           <p>{error.message}</p>
         </Card>
       )
-    }
-
-    if (isLoading) {
-      return '' // add spinner
     }
 
     return (

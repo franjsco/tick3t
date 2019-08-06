@@ -4,7 +4,7 @@ A simple ticketing system
 
 ![tick3t screenshot](screenshot.png) 
 
----
+
 ### Technologies:
 
 - HTML5/CSS3

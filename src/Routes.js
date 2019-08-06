@@ -16,6 +16,7 @@ import Login from "./containers/Administration/Login";
 import Logout from "./containers/Logout";
 import TicketList from "./containers/Administration/TicketList";
 import TicketManager from "./containers/Administration/TicketManager";
+import Settings from './containers/Administration/Settings';
 
 class Routes extends Component {
   constructor(props) {
@@ -40,6 +41,8 @@ class Routes extends Component {
 
             <PrivateRoute path="/admin/" exact component={TicketList} />
             <PrivateRoute path="/admin/ticket/:ticketId" component={TicketManager} />
+            <PrivateRoute path="/admin/settings" exact component={Settings} />
+
             <PrivateRoute path="/logout" component={Logout} />
             <Route component={PageNotFound} />
           </Switch>

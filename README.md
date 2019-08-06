@@ -2,11 +2,19 @@
 A simple ticketing system
 
 
-![tomadoro screenshot](screenshot.png) 
+![tick3t screenshot](screenshot.png) 
+
+---
+### Technologies:
+
+- HTML5/CSS3
+- React.js
+- Redux
+- Bootstrap (reactstrap)
 
 
-## Demo
-Try tick3t: ---
+## Backend Service
+To work, you need to configure the backend(REST-API): [tick3t-api](https://github.com/frsposito/tick3t-api)
 
 ## License
 GPLv3

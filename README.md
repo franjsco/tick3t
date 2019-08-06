@@ -6,7 +6,7 @@ A simple ticketing system
 
 ---
 
-**Technologies**
+**Technologies:**
 
 - HTML5/CSS3
 - React.js

@@ -14,7 +14,7 @@ A simple ticketing system
 
 
 ## Backend Service
-To work, you need to configure the backend(REST-API): [tick3t-api](https://github.com/frsposito/tick3t-api)
+To work, you need to configure the backend(REST API): [tick3t-api](https://github.com/frsposito/tick3t-api)
 
 ## License
 GPLv3

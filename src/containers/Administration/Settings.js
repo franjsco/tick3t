@@ -92,6 +92,7 @@ class Settings extends Component {
       <Card
         align="right"
         title="Settings"
+        footerLink={{ path: "/", name: "Back to home" }} 
       >
         <Row>
           <Col

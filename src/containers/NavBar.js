@@ -14,7 +14,7 @@ import {
   NavItem
 } from 'reactstrap';
 
-import Button from '../components/Button';
+import Button from '../components/UI/Button';
 import './NavBar.css';
 import logo from '../assets/admin.svg';
 
@@ -55,10 +55,7 @@ class NavBar extends Component {
       >
         <Container>
           <NavbarBrand
-            onClick={this.closeNavbar}
             className="title"
-            tag={Link}
-            to="/"
           >
             tick3t
           </NavbarBrand>

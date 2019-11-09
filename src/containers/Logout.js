@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { userActions } from './../_actions';
-import Card from '../components/Card';
+import Card from '../components/UI/Card';
 
 
 const Logout = (props) => {
@@ -20,10 +20,6 @@ const Logout = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(userActions.logout()),
@@ -31,4 +27,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);

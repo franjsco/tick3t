@@ -13,10 +13,10 @@ import {
 import { getAllTicketStatus } from '../../api/categories';
 import { viewTicket, updateTicket } from '../../api/tickets';
 
-import Card from '../../components/Card';
-import Table from '../../components/Table';
-import DropDown from '../../components/DropDown';
-import Button from '../../components/Button';
+import Card from '../../components/UI/Card';
+import TicketTable from '../../components/TicketTable';
+import DropDown from '../../components/UI/DropDown';
+import Button from '../../components/UI/Button';
 
 
 class TicketManager extends Component {
@@ -113,7 +113,7 @@ class TicketManager extends Component {
         >
           <Row>
             <Col>
-              <Table data={data} />
+              <TicketTable data={data} />
               <Link to="/admin/">Back to Ticket List</Link>
             </Col>
           </Row>

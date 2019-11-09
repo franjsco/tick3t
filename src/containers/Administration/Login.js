@@ -11,8 +11,8 @@ import {
   Input
 } from 'reactstrap';
 
-import Card from '../../components/Card';
-import Button from '../../components/Button';
+import Card from '../../components/UI/Card';
+import Button from '../../components/UI/Button';
 
 class Login extends Component {
   constructor(props) {
@@ -77,6 +77,7 @@ class Login extends Component {
       <Card
         align="left"
         title="Login"
+        footerLink={{ path: "/", name: "Back to home" }}
       >
         <Row>
           <Col

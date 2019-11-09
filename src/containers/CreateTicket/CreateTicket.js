@@ -11,9 +11,9 @@ import {
 import { createTicket } from '../../api/tickets';
 import { getAllTicketType } from '../../api/categories';
 
-import Card from '../../components/Card';
-import DropDown from '../../components/DropDown';
-import Button from '../../components/Button';
+import Card from '../../components/UI/Card';
+import DropDown from '../../components/UI/DropDown';
+import Button from '../../components/UI/Button';
 
 // TODO: improve form validation
 class CreateTicket extends Component {

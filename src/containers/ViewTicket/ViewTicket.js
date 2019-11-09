@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { viewTicket } from '../../api/tickets';
 
-import Card from '../../components/Card';
-import Table from '../../components/Table';
+import Card from '../../components/UI/Card';
+import TicketTable from '../../components/TicketTable';
 
 class ViewTicket extends Component {
   constructor(props) {
@@ -43,11 +42,9 @@ class ViewTicket extends Component {
         title="View Ticket"
         headAlign="left"
         bodyAlign="center"
+        footerLink={{ path: "/", name: "Go to home" }}
       >
-        <Table data={data} />
-        <Link to="/">
-          Back to home
-        </Link>
+        <TicketTable data={data} />
       </Card>
     );
   }

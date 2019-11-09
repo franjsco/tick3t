@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Card from '../../components/Card';
+import Card from '../../components/UI/Card';
 import SearchForm from '../../components/SearchForm';
-import Logo from '../../components/Logo';
+import Logo from '../../components/UI/Logo';
 import logoSearchTicket from '../../assets/search_ticket.svg';
 
 

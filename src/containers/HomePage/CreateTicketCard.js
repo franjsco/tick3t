@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from '../../components/Card';
-import Logo from '../../components/Logo';
-import Button from '../../components/Button';
+import Card from '../../components/UI/Card';
+import Logo from '../../components/UI/Logo';
+import Button from '../../components/UI/Button';
 
 import logoCreateTicket from '../../assets/create_ticket.svg';
 

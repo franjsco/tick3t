@@ -10,12 +10,12 @@ import {
 import PaginationComponent from "react-reactstrap-pagination";
 
 import { formatDate, formatStatus } from '../../utils/helper';
-import { getTickets, viewTicket, findTicket} from '../../api/tickets';
+import { getTickets, findTicket} from '../../api/tickets';
 import { getAllTicketStatus } from '../../api/categories';
 
-import Card from '../../components/Card';
+import Card from '../../components/UI/Card';
 import SearchForm from '../../components/SearchForm';
-import DropDown from '../../components/DropDown';
+import DropDown from '../../components/UI/DropDown';
 
 
 const paginationStyle = {
@@ -152,7 +152,9 @@ class TicketList extends Component {
     }
 
     return (
-      <Card title="Ticket List">
+      <Card 
+        title="Ticket List"
+        footerLink={{ path: "/", name: "Back to home" }} >
         <Row>
           <Col md={{ size: 4 }}>
             <SearchForm

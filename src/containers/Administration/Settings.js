@@ -11,8 +11,8 @@ import {
   Input
 } from 'reactstrap';
 
-import Card from '../../components/Card';
-import Button from '../../components/Button';
+import Card from '../../components/UI/Card';
+import Button from '../../components/UI/Button';
 
 class Settings extends Component {
   constructor(props) {

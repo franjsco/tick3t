@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const style = {
-  borderRadius: 10
+  borderRadius: 6
 };
 
 const styleCardTitle = {

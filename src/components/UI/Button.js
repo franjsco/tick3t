@@ -4,8 +4,8 @@ import {
 } from 'reactstrap';
 
 const style = {
-  borderRadius: 20,
-  backgroundImage: 'linear-gradient(to left, #0eaed3, #8346f6)'
+  borderRadius: 6,
+  backgroundImage: 'linear-gradient(to left, #0eaed3, #8346f6)',
 };
 
 const Button = (props) => {

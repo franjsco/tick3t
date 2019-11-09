@@ -34,7 +34,7 @@ const Card = (props) => {
       style={style}
     >
       <CardBody>
-        <CardTitle className={styleCardTitle}>
+        <CardTitle>
           <h5 style={styleCardTitle} className={headAlign}>
             {props.title}
           </h5>

@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 const style = {
-  borderRadius: 6,
+  borderRadius: 8,
   backgroundImage: 'linear-gradient(to left, #0eaed3, #8346f6)',
 };
 

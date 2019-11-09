@@ -11,7 +11,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import Home from "./containers/HomePage/Home";
 import CreateTicket from "./containers/CreateTicket/CreateTicket";
 import ViewRequest from "./containers/ViewTicket/ViewTicket";
-import PageNotFound from "./containers/PageNotFound";
+import PageNotFound from "./components/PageNotFound";
 import Login from "./containers/Administration/Login";
 import Logout from "./containers/Logout";
 import TicketList from "./containers/Administration/TicketList";

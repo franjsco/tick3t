@@ -2,7 +2,7 @@
   "name": "tick3t",
   "version": "0.1.0",
   "private": true,
-  "author": "frsposito",
+  "author": "franjsco",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",

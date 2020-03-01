@@ -18,8 +18,8 @@ const Footer = (props) => {
     <Row className="row-centred">
       <Col>
         <p style={mainCredits} className="text-center">
-          <a href="https://github.com/frsposito/tick3t">tick3t</a>{` `}
-          by <a href="https://github.com/frsposito">@frsposito</a> (Francesco Esposito)
+          <a href="https://github.com/franjsco/tick3t">tick3t</a>{` `}
+          by <a href="https://github.com/franjsco">@franjsco</a> (Francesco Esposito)
         </p>
         
         <p style={othersCredits} className="text-center">
